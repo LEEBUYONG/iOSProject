@@ -15,19 +15,19 @@ class GameController {
         let answer = randomGenerator.makeAnswer()
         
         while true {
-            // ===== LV 1. 사용자 입력 받기 =====
+            // ===== LV 1. inputHnadler_ 사용자 입력 받기 =====
             let userInput = inputHandler.getUserInput()
             
-            // ===== LV 2. 입력이 올바르지 않다면 반복문 처음으로 =====
+            // ===== LV 2. inputHandler~gameView_ 입력 내용 필터 =====
             guard inputHandler.isValidInput(userInput) else {
                     gameView.displayInvalidInputMessage()
                     continue
             }
             
-            // ===== LV 2. 정답과 유저의 입력값을 비교하여 스트라이크/볼을 출력하기 =====
+            // ===== LV 2. S,B 구분 함수_ 정답과 유저의 입력값을 비교하여 스트라이크/볼을 출력하기 =====
             let (strike, ball) = calculateScore(answer: answer, userInput: userInput)
             
-            // ===== LV 2. 결과 확인 =====
+            // ===== LV 2. gameView_ 결과 확인 =====
             gameView.displayResult(strike: strike, ball: ball)
             
             if strike == 3 {
@@ -42,6 +42,7 @@ class GameController {
         var strike = 0
         var ball = 0
         
+        // ===== 입력받은 내역과 정답의 S,B 비교 =====
         for (index, number) in userInput.enumerated() {
             if answer[index] == number {
                 strike += 1

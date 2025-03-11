@@ -6,6 +6,7 @@
 
 import Foundation
 
+// ==== 게임 실행 ====
 let gameController = GameController()
 gameController.start()
 

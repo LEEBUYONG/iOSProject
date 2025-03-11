@@ -3,6 +3,7 @@
 
 import Foundation
 
+//===== LV 1. 랜덤 숫자 생성(배열 -> contains 중복 확인) 사용 =====
 struct RandomGenerator {
     func makeAnswer() -> [Int] {
         var answer: [Int] = []
