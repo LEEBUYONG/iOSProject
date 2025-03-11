@@ -18,7 +18,8 @@ struct InputHandler {
     
     // ===== 잘못된 입력 처리 =====
     func isValidInput(_ userInput: [Int]) -> Bool {
-        return userInput.count == 3 && Set(userInput).count == 3 && !userInput.contains(0)
+        return userInput.count == 3 && Set(userInput).count == 3
+        //&& !userInput.contains(0)
     }
 }
 

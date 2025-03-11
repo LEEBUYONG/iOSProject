@@ -8,8 +8,14 @@ struct RandomGenerator {
     func makeAnswer() -> [Int] {
         var answer: [Int] = []
         
+        // ===== LV 3. 랜덤 숫자 0도 추가 =====
         while answer.count < 3 {
-            let randomNumber = Int.random(in: 1...9)
+            var randomNumber = Int.random(in: 0...9)
+                if answer.isEmpty {
+                    randomNumber = Int.random(in: 1...9)
+                    } else {
+                        randomNumber = Int.random(in: 0...9)
+                    }
             if !answer.contains(randomNumber) { // 중복 체크
                 answer.append(randomNumber)
             }
