@@ -7,7 +7,5 @@
 import Foundation
 
 // ==== 게임 실행 ====
-let gameController = GameController()
-gameController.start()
-
-
+let appController = AppController() // AppController 초기화
+appController.runApp()               // AppController의 start() 호출

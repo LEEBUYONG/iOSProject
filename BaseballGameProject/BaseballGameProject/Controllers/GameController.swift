@@ -8,15 +8,22 @@ class GameController {
     private let randomGenerator = RandomGenerator()
     private let gameView = GameView()
     private let inputHandler = InputHandler()
-    
+    private let recordsManager: GameRecordsManager
+
+       init(recordsManager: GameRecordsManager) {
+           self.recordsManager = recordsManager
+       }
     
     //-----게임 시작 함수-----
-    func start() {
+    func startGame() {
         let answer = randomGenerator.makeAnswer()
+        var attempts = 0 //게임 시도 횟수
         
         while true {
-            // ===== LV 1. inputHnadler_ 사용자 입력 받기 =====
+            // ===== LV 1. 사용자 입력 받기 =====
             let userInput = inputHandler.getUserInput()
+            //===== LV 5. 시도 횟수 증가 =====
+            attempts += 1
             
             // ===== LV 2. inputHandler~gameView_ 입력 내용 필터 =====
             guard inputHandler.isValidInput(userInput) else {
@@ -32,6 +39,8 @@ class GameController {
             
             if strike == 3 {
                 gameView.displayCorrectAnswerMessage()
+                // ===== LV 5. 게임 레코드에 기록 추가 =====
+                recordsManager.addRecord(attempts: attempts)
                 break
             }
         }
