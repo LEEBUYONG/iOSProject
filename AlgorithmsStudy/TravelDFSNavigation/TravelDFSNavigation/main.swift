@@ -9,5 +9,5 @@ import Foundation
 
 print("Hello, World!")
 
-let travel = TravelExploration()
-travel.dfs(node: 0)
+//let travel = TravelExploration()
+//travel.dfs(node: 0)

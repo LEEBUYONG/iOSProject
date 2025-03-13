@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXCopyFilesBuildPhase section */
-		787495BC2D825BE9002CA6ED /* CopyFiles */ = {
+		78A578602D82D7F000FC9B36 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -19,19 +19,19 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		787495BE2D825BE9002CA6ED /* AlgorithmsStudy */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = AlgorithmsStudy; sourceTree = BUILT_PRODUCTS_DIR; };
+		78A578622D82D7F000FC9B36 /* TravelDFSNavigation */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TravelDFSNavigation; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		787495C02D825BE9002CA6ED /* AlgorithmsStudy */ = {
+		78A578642D82D7F000FC9B36 /* TravelDFSNavigation */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = AlgorithmsStudy;
+			path = TravelDFSNavigation;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		787495BB2D825BE9002CA6ED /* Frameworks */ = {
+		78A5785F2D82D7F000FC9B36 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -41,18 +41,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		787495B52D825BE9002CA6ED = {
+		78A578592D82D7F000FC9B36 = {
 			isa = PBXGroup;
 			children = (
-				787495C02D825BE9002CA6ED /* AlgorithmsStudy */,
-				787495BF2D825BE9002CA6ED /* Products */,
+				78A578642D82D7F000FC9B36 /* TravelDFSNavigation */,
+				78A578632D82D7F000FC9B36 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		787495BF2D825BE9002CA6ED /* Products */ = {
+		78A578632D82D7F000FC9B36 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				787495BE2D825BE9002CA6ED /* AlgorithmsStudy */,
+				78A578622D82D7F000FC9B36 /* TravelDFSNavigation */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -60,64 +60,64 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		787495BD2D825BE9002CA6ED /* AlgorithmsStudy */ = {
+		78A578612D82D7F000FC9B36 /* TravelDFSNavigation */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 787495C52D825BE9002CA6ED /* Build configuration list for PBXNativeTarget "AlgorithmsStudy" */;
+			buildConfigurationList = 78A578692D82D7F000FC9B36 /* Build configuration list for PBXNativeTarget "TravelDFSNavigation" */;
 			buildPhases = (
-				787495BA2D825BE9002CA6ED /* Sources */,
-				787495BB2D825BE9002CA6ED /* Frameworks */,
-				787495BC2D825BE9002CA6ED /* CopyFiles */,
+				78A5785E2D82D7F000FC9B36 /* Sources */,
+				78A5785F2D82D7F000FC9B36 /* Frameworks */,
+				78A578602D82D7F000FC9B36 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				787495C02D825BE9002CA6ED /* AlgorithmsStudy */,
+				78A578642D82D7F000FC9B36 /* TravelDFSNavigation */,
 			);
-			name = AlgorithmsStudy;
+			name = TravelDFSNavigation;
 			packageProductDependencies = (
 			);
-			productName = AlgorithmsStudy;
-			productReference = 787495BE2D825BE9002CA6ED /* AlgorithmsStudy */;
+			productName = TravelDFSNavigation;
+			productReference = 78A578622D82D7F000FC9B36 /* TravelDFSNavigation */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		787495B62D825BE9002CA6ED /* Project object */ = {
+		78A5785A2D82D7F000FC9B36 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1620;
 				LastUpgradeCheck = 1620;
 				TargetAttributes = {
-					787495BD2D825BE9002CA6ED = {
+					78A578612D82D7F000FC9B36 = {
 						CreatedOnToolsVersion = 16.2;
 					};
 				};
 			};
-			buildConfigurationList = 787495B92D825BE9002CA6ED /* Build configuration list for PBXProject "AlgorithmsStudy" */;
+			buildConfigurationList = 78A5785D2D82D7F000FC9B36 /* Build configuration list for PBXProject "TravelDFSNavigation" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = 787495B52D825BE9002CA6ED;
+			mainGroup = 78A578592D82D7F000FC9B36;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 787495BF2D825BE9002CA6ED /* Products */;
+			productRefGroup = 78A578632D82D7F000FC9B36 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				787495BD2D825BE9002CA6ED /* AlgorithmsStudy */,
+				78A578612D82D7F000FC9B36 /* TravelDFSNavigation */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		787495BA2D825BE9002CA6ED /* Sources */ = {
+		78A5785E2D82D7F000FC9B36 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -127,7 +127,7 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		787495C32D825BE9002CA6ED /* Debug */ = {
+		78A578672D82D7F000FC9B36 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -190,7 +190,7 @@
 			};
 			name = Debug;
 		};
-		787495C42D825BE9002CA6ED /* Release */ = {
+		78A578682D82D7F000FC9B36 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -245,7 +245,7 @@
 			};
 			name = Release;
 		};
-		787495C62D825BE9002CA6ED /* Debug */ = {
+		78A5786A2D82D7F000FC9B36 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -256,7 +256,7 @@
 			};
 			name = Debug;
 		};
-		787495C72D825BE9002CA6ED /* Release */ = {
+		78A5786B2D82D7F000FC9B36 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -270,25 +270,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		787495B92D825BE9002CA6ED /* Build configuration list for PBXProject "AlgorithmsStudy" */ = {
+		78A5785D2D82D7F000FC9B36 /* Build configuration list for PBXProject "TravelDFSNavigation" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				787495C32D825BE9002CA6ED /* Debug */,
-				787495C42D825BE9002CA6ED /* Release */,
+				78A578672D82D7F000FC9B36 /* Debug */,
+				78A578682D82D7F000FC9B36 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		787495C52D825BE9002CA6ED /* Build configuration list for PBXNativeTarget "AlgorithmsStudy" */ = {
+		78A578692D82D7F000FC9B36 /* Build configuration list for PBXNativeTarget "TravelDFSNavigation" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				787495C62D825BE9002CA6ED /* Debug */,
-				787495C72D825BE9002CA6ED /* Release */,
+				78A5786A2D82D7F000FC9B36 /* Debug */,
+				78A5786B2D82D7F000FC9B36 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 787495B62D825BE9002CA6ED /* Project object */;
+	rootObject = 78A5785A2D82D7F000FC9B36 /* Project object */;
 }
