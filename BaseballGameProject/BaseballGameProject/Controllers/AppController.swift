@@ -45,13 +45,16 @@ class AppController {
 
     // ===== LV 5. GameRecordsManager를 통해 기록 조회(출력) =====
     private func showGameRecords() {
-        let records = recordsManager.getAllRecords()
-        if records.isEmpty {
-            print("아직 완료한 게임이 없습니다.")
-        } else {
-            for (index, attempts) in records.enumerated() {
-                print("\(index + 1)번째 게임 : 시도 횟수 - \(attempts)")
+            do {
+                let records = try recordsManager.getAllRecords()
+                for (index, attempts) in records.enumerated() {
+                    print("\(index + 1)번째 게임 : 시도 횟수 - \(attempts)")
+                }
+            } catch GameRecordsError.noRecords {
+                print("⚠️ 아직 완료한 게임이 없습니다! ")
+            } catch {
+                print("⚠️ 알 수 없는 오류가 발생했습니다: \(error)")
             }
-        }
     }
+    
 }
