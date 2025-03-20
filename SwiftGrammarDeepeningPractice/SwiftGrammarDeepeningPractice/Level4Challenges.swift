@@ -1,4 +1,11 @@
+// ===== 25.03.20.(목) 예외 처리 추가 =====
 // ===== LV 4. 객체 지향 설계 (class 상속 구현)
+
+// ----- 예외처리를 위한 열거형 -----
+enum ElectricCarError: Error {
+    case lowBattery
+}
+
 // ----- 요구사항 1. 엔진 커스텀 정의 -----
 class Engine: CustomStringConvertible {
     var engineType: String
@@ -43,7 +50,7 @@ class Car: CustomStringConvertible {
         return "\(model) 자동차 시동이 꺼졌습니다"
     }
     
-    func drive() -> String {
+    func drive() throws -> String {
         if isTurnOn == true {
             return "\(model) 자동차가 주행 중입니다"
         } else {
@@ -64,15 +71,44 @@ class Car: CustomStringConvertible {
 
 // ----- 요구사항 2. ElectricEngine 타입 사용 -----
 class ElectricEngine: Engine {
-    override init(engineType: String) {
+    var battery: Int
+    
+    init(engineType: String, battery: Int) {
+        self.battery = battery
         super.init(engineType: engineType)
     }
 }
 
 class ElectricCar: Car {
-    init(brand: String, model: String, carYear: String) {
-        let electricEngine = ElectricEngine(engineType: "전기차 전용 엔진")
+    init(brand: String, model: String, carYear: String, battery: Int) {
+        let electricEngine = ElectricEngine(engineType: "전기차 엔진", battery: battery)
         super.init(brand: brand, model: model, carYear: carYear, engine: electricEngine)
+    }
+    
+    // ----- 배터리 충전(배터리 부족 시 예외처리) -----
+    func batteryCharge (_ a: Int) throws -> String {
+        guard let electricEngine = engine as? ElectricEngine else {
+            return "전기차가 아니므로 배터리를 충전할 수 없습니다."
+        }
+        
+        if a > 100 {
+            electricEngine.battery = 100
+            return "충전 게이지가 100%가 넘어 더이상 충전할 수 없습니다. 현재 배터리 100%입니다."
+        } else if a <= 0 {
+            electricEngine.battery = 0
+            throw ElectricCarError.lowBattery   //배터리 방전 시 예외 처리
+        }
+        
+        electricEngine.battery += a
+        return ("\(model) 자동차의 배터리가 \(electricEngine.battery)%로 충전되었습니다.")
+    }
+    
+    override func drive() throws -> String {
+        guard let electricEngine = engine as? ElectricEngine, electricEngine.battery > 10 else {
+            throw ElectricCarError.lowBattery
+        }
+        electricEngine.battery -= 10
+        return "\(model) 자동차가 주행 중입니다. 배터리 잔량: \(electricEngine.battery)%"
     }
 }
 
@@ -85,7 +121,7 @@ class HydrogenEngine: Engine {
 
 class HydrogenCar: Car {
     init(brand: String, model: String, carYear: String) {
-        let hydrogenEngine = HydrogenEngine(engineType: "하이브리드 차량 전용 엔진")
+        let hydrogenEngine = HydrogenEngine(engineType: "하이브리드 차량 엔진")
         super.init(brand: brand, model: model, carYear: carYear, engine: hydrogenEngine)
     }
     
@@ -108,15 +144,26 @@ func carPlayCode() {
     let car = Car(brand: "bmw", model: "x5", carYear: "2020", engine: Engine(engineType: "디젤 Engine"))
     print(car)
     
-    let electricCar = ElectricCar(brand: "tesla", model: "model 3", carYear: "2021")
+    let electricCar = ElectricCar(brand: "tesla", model: "model 3", carYear: "2021", battery: 10)
     print(electricCar)
+    
+    // ----- ElectricCar 주행 시 예외 처리 -----
+    do {
+        let driveResult = try electricCar.drive()
+        print(driveResult)
+    } catch ElectricCarError.lowBattery {
+        print("❌ 배터리가 10% 미만으로 주행이 불가합니다. 배터리를 충전해주세요")
+    } catch {
+            print("⚠️ 배터리 충전 중 에러 발생: \(error)")
+    }
     
     let hydrogenCar = HydrogenCar(brand: "ford", model: "mustang", carYear: "2022")
     print(hydrogenCar)
     
-    hydrogenCar.switchEngine(to: ElectricEngine(engineType: "전기차 전용 엔진"))
+    hydrogenCar.switchEngine(to: ElectricEngine(engineType: "전기차 엔진", battery: 40))
     print(hydrogenCar)
 }
+
 
 // ----- 요구사항 5. 상속과 프로토콜 장단점, 차이 서술 -----
 /*
