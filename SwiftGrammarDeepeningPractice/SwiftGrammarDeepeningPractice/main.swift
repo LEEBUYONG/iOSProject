@@ -1,23 +1,27 @@
-// ===== 3주차 문법 심화 과제 =====
+// 최종수정일: 25.03.19.(수)
+// 03.20.(목) 수정 예정 내역: LV 4. 작성, 파일 분리, 주석 정리, 코드 컨벤션 확인 =====
+
 
 import Foundation
-
-// ===== LV 1. 클로저 심화 실습하기 =====
-// --- 요구사항 1, 2. 클로저 정의 및 클로저 상수 sum에 저장 ---
-let sum: (Int, Int) -> String = {
-    let result: Int = $0 + $1
-    return "두 수의 합은 \(result) 입니다"
-}
-
-// --- 요구사항 3. sum 호출 ---
+// ===== Level 1. 실행코드 =====
 print(sum (10,20))
-
-// --- 요구사항 4. 클로저를 파라미터로 받고 반환 값이 없는 함수 작성 및 호출 ---
-func calculate(closure: (Int, Int) -> String, _ a: Int, _ b: Int) {
-    let result = closure(a,b)
-    print(result)
-    
-}
-
 calculate(closure: sum, 10, 30)
+
+
+// ===== Level 2. 실행코드 =====
+print(resultMap)
+print(resultStringMap)
+let resultMyMap = myMap([1, 2, 3, 4, 5]) { String($0) }
+print(resultMyMap)
+
+
+// ===== Level 3. 실행코드 =====
+print(a([1, 2, 3, 4, 5]))
+print(b(["가","나","다","라","마"]))
+print(c([1,2,3,4,5],["가","나","다","라","마"]))
+print(d([1,2,3,4,5]))
+
+
+// ===== Level 4. 실행코드 =====
+carPlayCode()
 
