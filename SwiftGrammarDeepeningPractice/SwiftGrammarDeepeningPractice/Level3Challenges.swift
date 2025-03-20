@@ -67,3 +67,17 @@ func d<T: Numeric>(_ x: [T]) -> [T] {
     let resultInt: [T] = x.enumerated().filter{ $0.offset % 2 == 0 }.map { $0.element }
     return resultInt
 }
+
+// ----- 함수 d1 구현: Numeric + 타입 캐스팅 -----
+func d1<T: Numeric>(_ x: [T]) -> [T] {
+    let result: [T] = x.filter { value in
+        // 정수 또는 실수 모두 처리
+        if let intValue = value as? Int, intValue % 2 == 1 {
+            return true
+        } else if let doubleValue = value as? Double, Int(doubleValue) % 2 == 1 {
+            return true
+        }
+        return false
+    }
+    return result
+}
