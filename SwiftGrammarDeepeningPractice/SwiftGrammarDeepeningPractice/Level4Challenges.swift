@@ -77,6 +77,11 @@ class ElectricEngine: Engine {
         self.battery = battery
         super.init(engineType: engineType)
     }
+    
+    // ----- 배터리 정보를 포함한 출력 추가 -----
+    override var description: String {
+        return "배터리 잔량: \(battery)%"
+    }
 }
 
 class ElectricCar: Car {
