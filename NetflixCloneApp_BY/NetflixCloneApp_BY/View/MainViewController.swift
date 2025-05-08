@@ -85,10 +85,10 @@ class MainViewController: UIViewController {
         
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
-        // 각 그룹에 대한 넓이는 화면 넓이 25%, 높이는 넓이의 40%를 차지하도록 설정
+        // 각 그룹에 대한 넓이는 화면 넓이 25%, 높이는 넓이의 25%를 차지하도록 설정
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(0.25),
-            heightDimension: .fractionalHeight(0.4)
+            heightDimension: .fractionalHeight(0.25)
         )
         
         // 그룹이 수평적으로 구성되도록 선언 (horizontal)
@@ -210,5 +210,10 @@ extension MainViewController: UICollectionViewDataSource {
         case .upcomingMovies: return upcomingMovies.count
         default : return 0
         }
+    }
+    
+    // collectionView의 섹션이 몇개인지 설정(Section case의 개수를 세면 됨)
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return Section.allCases.count
     }
 }

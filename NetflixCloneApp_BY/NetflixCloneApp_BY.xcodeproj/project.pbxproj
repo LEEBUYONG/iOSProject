@@ -12,7 +12,6 @@
 		78767C172DCC866000697C82 /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = 78767C162DCC866000697C82 /* RxBlocking */; };
 		78767C192DCC866000697C82 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 78767C182DCC866000697C82 /* RxCocoa */; };
 		78767C1B2DCC866000697C82 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 78767C1A2DCC866000697C82 /* RxRelay */; };
-		78767C1D2DCC866000697C82 /* RxRelay-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 78767C1C2DCC866000697C82 /* RxRelay-Dynamic */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,7 +46,6 @@
 			files = (
 				78767C1B2DCC866000697C82 /* RxRelay in Frameworks */,
 				78767C062DCC70D300697C82 /* SnapKit in Frameworks */,
-				78767C1D2DCC866000697C82 /* RxRelay-Dynamic in Frameworks */,
 				78767C172DCC866000697C82 /* RxBlocking in Frameworks */,
 				78767C192DCC866000697C82 /* RxCocoa in Frameworks */,
 				78767C0F2DCC721A00697C82 /* Then in Frameworks */,
@@ -98,7 +96,6 @@
 				78767C162DCC866000697C82 /* RxBlocking */,
 				78767C182DCC866000697C82 /* RxCocoa */,
 				78767C1A2DCC866000697C82 /* RxRelay */,
-				78767C1C2DCC866000697C82 /* RxRelay-Dynamic */,
 			);
 			productName = NetflixCloneApp_BY;
 			productReference = 78767BC92DCC55FA00697C82 /* NetflixCloneApp_BY.app */;
@@ -414,11 +411,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 78767C152DCC866000697C82 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxRelay;
-		};
-		78767C1C2DCC866000697C82 /* RxRelay-Dynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 78767C152DCC866000697C82 /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = "RxRelay-Dynamic";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
