@@ -8,9 +8,15 @@
 import UIKit
 
 import SnapKit
+import RxSwift
 import Then
 
 class MainViewController: UIViewController {
+    
+    // MainVM을 바라보기 위한 VM선언
+    private let mainVM = MainViewModel()
+    
+    private let disposeBag = DisposeBag()
     
     private var popularMovies = [Movie]()
     private var topRatedMovies = [Movie]()
@@ -32,7 +38,41 @@ class MainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        bind()
+        configureUI()
+    }
+    
+    // VM과 VC를 연결하기 위한 데이터 바인딩 메서드
+    private func bind() {
+        // VM에서 fetchPopulerMovie()가 실행되면 서버로부터 영화 정보를 가져오고 subject 안에 넣어서 onNext()를 통해 방출되도록 설정
+        // 그리고 Subject를 구독을 하게 된다면 서버에서 해당 데이터가 들어왔을 때 방출된 구독한 View가 이벤트를 받게됨
+        mainVM.popluarMovieSubject
+            .observe(on: MainScheduler.instance)        //reloadData는 UI 관련 로직으로 해당 코드가 메인스레드에서 동작할 수 있도록 함
+            .subscribe(onNext: { [weak self] movies in
+            self?.popularMovies = movies
+            self?.collectionView.reloadData()
+        }, onError: { error in
+            print("에러발생: \(error)")
+        }).disposed(by: disposeBag)
+        
+        mainVM.topRatedMovieSubject
+            .observe(on: MainScheduler.instance)        //reloadData는 UI 관련 로직으로 해당 코드가 메인스레드에서 동작할 수 있도록 함
+            .subscribe(onNext: { [weak self] movies in
+            self?.topRatedMovies = movies
+            self?.collectionView.reloadData()
+        }, onError: { error in
+            print("에러발생: \(error)")
+        }).disposed(by: disposeBag)
+        
+        mainVM.upcomingMovieSubject
+            .observe(on: MainScheduler.instance)        //reloadData는 UI 관련 로직으로 해당 코드가 메인스레드에서 동작할 수 있도록 함
+            .subscribe(onNext: { [weak self] movies in
+            self?.upcomingMovies = movies
+            self?.collectionView.reloadData()
+        }, onError: { error in
+            print("에러발생: \(error)")
+        }).disposed(by: disposeBag)
+
     }
 
     private func createLayout() -> UICollectionViewLayout {
