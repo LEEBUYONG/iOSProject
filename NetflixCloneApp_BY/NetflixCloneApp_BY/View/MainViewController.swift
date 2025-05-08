@@ -35,7 +35,7 @@ class MainViewController: UIViewController {
         $0.dataSource = self
         $0.backgroundColor = .black
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
@@ -49,32 +49,32 @@ class MainViewController: UIViewController {
         mainVM.popluarMovieSubject
             .observe(on: MainScheduler.instance)        //reloadData는 UI 관련 로직으로 해당 코드가 메인스레드에서 동작할 수 있도록 함
             .subscribe(onNext: { [weak self] movies in
-            self?.popularMovies = movies
-            self?.collectionView.reloadData()
-        }, onError: { error in
-            print("에러발생: \(error)")
-        }).disposed(by: disposeBag)
+                self?.popularMovies = movies
+                self?.collectionView.reloadData()
+            }, onError: { error in
+                print("에러발생: \(error)")
+            }).disposed(by: disposeBag)
         
         mainVM.topRatedMovieSubject
             .observe(on: MainScheduler.instance)        //reloadData는 UI 관련 로직으로 해당 코드가 메인스레드에서 동작할 수 있도록 함
             .subscribe(onNext: { [weak self] movies in
-            self?.topRatedMovies = movies
-            self?.collectionView.reloadData()
-        }, onError: { error in
-            print("에러발생: \(error)")
-        }).disposed(by: disposeBag)
+                self?.topRatedMovies = movies
+                self?.collectionView.reloadData()
+            }, onError: { error in
+                print("에러발생: \(error)")
+            }).disposed(by: disposeBag)
         
         mainVM.upcomingMovieSubject
             .observe(on: MainScheduler.instance)        //reloadData는 UI 관련 로직으로 해당 코드가 메인스레드에서 동작할 수 있도록 함
             .subscribe(onNext: { [weak self] movies in
-            self?.upcomingMovies = movies
-            self?.collectionView.reloadData()
-        }, onError: { error in
-            print("에러발생: \(error)")
-        }).disposed(by: disposeBag)
-
+                self?.upcomingMovies = movies
+                self?.collectionView.reloadData()
+            }, onError: { error in
+                print("에러발생: \(error)")
+            }).disposed(by: disposeBag)
+        
     }
-
+    
     private func createLayout() -> UICollectionViewLayout {
         
         // 각 item이 각 그룹 내에서 전체 넓이와 높이를 차지하도록 설정(1.0 = 100%)
@@ -100,7 +100,23 @@ class MainViewController: UIViewController {
         section.interGroupSpacing = 10                      /// 그룹 안에 아이템들 간의 간격(spacing)이 10이다
         section.contentInsets = .init(top: 10, leading: 10, bottom: 20, trailing: 10)   /// 각 섹션간의 inset 지정
         
-        return UICollectionViewLayout()
+        
+        // 헤더 사이즈와 설정 지정
+        let headerSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .estimated(44)
+        )
+        
+        let header = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerSize,
+            elementKind: UICollectionView.elementKindSectionHeader,
+            alignment: .top
+        )
+        
+        // 섹션에 우리가 만든 헤더 추가
+        section.boundarySupplementaryItems = [header]
+        
+        return UICollectionViewCompositionalLayout(section: section)
         
     }
     
@@ -138,20 +154,21 @@ enum Section: Int, CaseIterable {
     }
 }
 
+// 컬렉션뷰 셀을 클릭했을때 동영상이 재생되는 로직
 extension MainViewController: UICollectionViewDelegate {
     
 }
 
 extension MainViewController: UICollectionViewDataSource {
     
-    //각 indexPath 별로 어떤 Cell을 return 할건지, tableView의 cellForRowAt과 비슷한 역할, 섹션 별로 나눌 수 있음
+    // 각 indexPath 별로 어떤 Cell을 return 할건지, tableView의 cellForRowAt과 비슷한 역할, 섹션 별로 나눌 수 있음
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PosterCell.id, for: indexPath) as? PosterCell else {
             return UICollectionViewCell()
         }
         
         switch Section(rawValue: indexPath.section) {
-        // 각 셀에 포스터를 포함한 Movie 데이터를 서버에서 받아서 넣으면 됨
+            // 각 셀에 포스터를 포함한 Movie 데이터를 서버에서 받아서 넣으면 됨
         case .popularMovies:
             cell.configure(with: popularMovies[indexPath.row])
         case .topRatedMovies:
