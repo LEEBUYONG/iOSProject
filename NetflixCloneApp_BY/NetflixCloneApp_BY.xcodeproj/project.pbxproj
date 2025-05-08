@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		78767C062DCC70D300697C82 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 78767C052DCC70D300697C82 /* SnapKit */; };
 		78767C0F2DCC721A00697C82 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 78767C0E2DCC721A00697C82 /* Then */; };
+		78767C172DCC866000697C82 /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = 78767C162DCC866000697C82 /* RxBlocking */; };
+		78767C192DCC866000697C82 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 78767C182DCC866000697C82 /* RxCocoa */; };
+		78767C1B2DCC866000697C82 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 78767C1A2DCC866000697C82 /* RxRelay */; };
+		78767C1D2DCC866000697C82 /* RxRelay-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 78767C1C2DCC866000697C82 /* RxRelay-Dynamic */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,7 +45,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78767C1B2DCC866000697C82 /* RxRelay in Frameworks */,
 				78767C062DCC70D300697C82 /* SnapKit in Frameworks */,
+				78767C1D2DCC866000697C82 /* RxRelay-Dynamic in Frameworks */,
+				78767C172DCC866000697C82 /* RxBlocking in Frameworks */,
+				78767C192DCC866000697C82 /* RxCocoa in Frameworks */,
 				78767C0F2DCC721A00697C82 /* Then in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -87,6 +95,10 @@
 			packageProductDependencies = (
 				78767C052DCC70D300697C82 /* SnapKit */,
 				78767C0E2DCC721A00697C82 /* Then */,
+				78767C162DCC866000697C82 /* RxBlocking */,
+				78767C182DCC866000697C82 /* RxCocoa */,
+				78767C1A2DCC866000697C82 /* RxRelay */,
+				78767C1C2DCC866000697C82 /* RxRelay-Dynamic */,
 			);
 			productName = NetflixCloneApp_BY;
 			productReference = 78767BC92DCC55FA00697C82 /* NetflixCloneApp_BY.app */;
@@ -119,6 +131,7 @@
 			packageReferences = (
 				78767C042DCC70D300697C82 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				78767C0D2DCC721A00697C82 /* XCRemoteSwiftPackageReference "Then" */,
+				78767C152DCC866000697C82 /* XCRemoteSwiftPackageReference "RxSwift" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 78767BCA2DCC55FA00697C82 /* Products */;
@@ -366,6 +379,14 @@
 				minimumVersion = 3.0.0;
 			};
 		};
+		78767C152DCC866000697C82 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.9.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -378,6 +399,26 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 78767C0D2DCC721A00697C82 /* XCRemoteSwiftPackageReference "Then" */;
 			productName = Then;
+		};
+		78767C162DCC866000697C82 /* RxBlocking */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 78767C152DCC866000697C82 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxBlocking;
+		};
+		78767C182DCC866000697C82 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 78767C152DCC866000697C82 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		78767C1A2DCC866000697C82 /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 78767C152DCC866000697C82 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
+		};
+		78767C1C2DCC866000697C82 /* RxRelay-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 78767C152DCC866000697C82 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = "RxRelay-Dynamic";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
