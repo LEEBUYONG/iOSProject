@@ -14,7 +14,7 @@
 		78767BDE2DCC55FB00697C82 /* Exceptions for "NetflixCloneApp_BY" folder in "NetflixCloneApp_BY" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				Resource/Info.plist,
 			);
 			target = 78767BC82DCC55FA00697C82 /* NetflixCloneApp_BY */;
 		};
@@ -147,7 +147,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 373K7546A3;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = NetflixCloneApp_BY/Info.plist;
+				INFOPLIST_FILE = NetflixCloneApp_BY/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -175,7 +175,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 373K7546A3;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = NetflixCloneApp_BY/Info.plist;
+				INFOPLIST_FILE = NetflixCloneApp_BY/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
