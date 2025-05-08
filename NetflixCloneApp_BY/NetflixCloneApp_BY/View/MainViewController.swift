@@ -5,6 +5,8 @@
 //  Created by iOS study on 5/8/25.
 //
 
+import AVKit
+import AVFoundation
 import UIKit
 
 import SnapKit
@@ -136,6 +138,25 @@ class MainViewController: UIViewController {
         }
     }
     
+    // 동영상 재생을 위한 메서드 (YouTubeiOSPlayerHelper를 사용하기 때문에 아래 메서드는 사용 x)
+    // 다만 YouTubeiOSPlayerHelper를 사용하는 것이 아닌 실제 회사나 url을 통해 동영상 데이터를 내려받을 때는
+    // 아래와 같은 방식으로 url을 넣어서 AVPlayer와 AVPlayerViewController을 통해 동영상을 재생하게 됨
+    private func playVideoUrl() {
+        
+        let url = URL(string: "https://storage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4")!
+
+        // url을 AVPlayer객체에 담아서 동영상으로 만드는 것
+        let player = AVPlayer(url: url)
+        
+        let playerVC = AVPlayerViewController()
+        
+        playerVC.player = player
+        
+        present(playerVC, animated: true) {
+            player.play()
+        }
+    }
+    
 }
 
 // 섹션을 좀 더 쉽게 구별하기 위해 enum 사용
@@ -156,7 +177,42 @@ enum Section: Int, CaseIterable {
 
 // 컬렉션뷰 셀을 클릭했을때 동영상이 재생되는 로직
 extension MainViewController: UICollectionViewDelegate {
-    
+    // 아이템을 클릭했을 때 반응하는 메서드 (Switch로 각 섹션에 해당한 로직이 수행)
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch Section(rawValue: indexPath.section) {
+        case .popularMovies:
+            // popularMovies의  indexPath에 해당하는 0번째 movie data를 값을 가져옴
+            // 그리고 그 정보를 fetchTrailerKey해서 movieid를 얻고, url에 네트워크를 요청해서 동영상 키값을 받아와서 비디오를 재생시킴
+            // 또한 해당하는 동영상 키값 트레일러를 YouTubeiOSPlayerHelper를 사용해서 새 페이지로 열어서 보여주게됨
+            mainVM.fetchTrailerKey(movie: popularMovies[indexPath.row])
+                .observe(on: MainScheduler.instance)
+                .subscribe(onSuccess: { [weak self] key in
+                    self?.navigationController?.pushViewController(YoutubeViewController(key: key), animated: true)
+                }, onFailure: { error in
+                    print("에러발생: \(error)")
+                }).disposed(by: disposeBag)
+            
+        case .topRatedMovies:
+            mainVM.fetchTrailerKey(movie: topRatedMovies[indexPath.row])
+                .observe(on: MainScheduler.instance)
+                .subscribe(onSuccess: { [weak self] key in
+                    self?.navigationController?.pushViewController(YoutubeViewController(key: key), animated: true)
+                }, onFailure: { error in
+                    print("에러발생: \(error)")
+                }).disposed(by: disposeBag)
+            
+        case .upcomingMovies:
+            mainVM.fetchTrailerKey(movie: upcomingMovies[indexPath.row])
+                .observe(on: MainScheduler.instance)
+                .subscribe(onSuccess: { [weak self] key in
+                    self?.navigationController?.pushViewController(YoutubeViewController(key: key), animated: true)
+                }, onFailure: { error in
+                    print("에러발생: \(error)")
+                }).disposed(by: disposeBag)
+        default:
+            return
+        }
+    }
 }
 
 extension MainViewController: UICollectionViewDataSource {

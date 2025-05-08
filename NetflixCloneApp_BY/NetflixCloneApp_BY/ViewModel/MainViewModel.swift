@@ -72,5 +72,29 @@ class MainViewModel {
             }).disposed(by: disposeBag)
     }
     
+    // 트레일러 영상을 가져오기 위한 fetch 메서드
+    func fetchTrailerKey(movie: Movie) -> Single<String> {
+        guard let movieId = movie.id else { return Single.error(NetworkError.dataFetchFail)}
+        let urlString = "https://api.themoviedb.org/3/movie/\(movieId)/videos?api_key=\(apiKey)"
+        
+        guard let url = URL(string: urlString) else {
+            return Single.error(NetworkError.invalidUrl)
+        }
+        
+        // 가져온 API 데이터를 Single에 String 타입으로 return 타입을 바꿈 (flatMap 사용)
+        // 원래 Single<VideoResponse>인데 flatMap을 사용하면 Single<String>으로 변환 가능
+        return NetworkManager.shared.fetch(url: url)
+            .flatMap { (VideoRespons: VideoResponse) -> Single<String> in
+                // rseults 중에 가장 첫번째 원소(여러 트레일러 중 첫번째 트러일러)를 보겠다
+                // where: 을 통해 Response 중에 site, type도 같이 확인해서 체크함
+                if let trailer = VideoRespons.results.first(where: { $0.type == "Trailer" && $0.site == "YouTube"}) {
+                    // fetchTrailerKey의 return 타입은 String 키를 뱉을 수 있도록(key: String Type) Single에 just(key)로 넣어줌
+                    guard let key = trailer.key else { return Single.error(NetworkError.dataFetchFail) }
+                    return Single.just(key)
+                } else {
+                    return Single.error(NetworkError.dataFetchFail)
+                }
+            }
+    }
 }
 
