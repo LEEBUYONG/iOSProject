@@ -7,13 +7,151 @@
 
 import UIKit
 
+import SnapKit
+import Then
+
 class MainViewController: UIViewController {
+    
+    private var popularMovies = [Movie]()
+    private var topRatedMovies = [Movie]()
+    private var upcomingMovies = [Movie]()
+    
+    private let label = UILabel().then {
+        $0.text = "NETFLIX"
+        $0.textColor = UIColor(red: 229/255, green: 9/255, blue: 20/255, alpha: 1.0)
+        $0.font = UIFont.systemFont(ofSize: 28, weight: .heavy)
+    }
+    
+    private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout()).then {
+        $0.register(PosterCell.self, forCellWithReuseIdentifier: PosterCell.id)
+        $0.register(SectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeaderView.id)
+        $0.delegate = self
+        $0.dataSource = self
+        $0.backgroundColor = .black
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
     }
 
-
+    private func createLayout() -> UICollectionViewLayout {
+        
+        // 각 item이 각 그룹 내에서 전체 넓이와 높이를 차지하도록 설정(1.0 = 100%)
+        let itemSize = NSCollectionLayoutSize (
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(1.0)
+        )
+        
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        // 각 그룹에 대한 넓이는 화면 넓이 25%, 높이는 넓이의 40%를 차지하도록 설정
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(0.25),
+            heightDimension: .fractionalHeight(0.4)
+        )
+        
+        // 그룹이 수평적으로 구성되도록 선언 (horizontal)
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        
+        //
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .continuous   /// 스크롤이 수평방향으로 연속적으로 동작할 수 있도록 설정
+        section.interGroupSpacing = 10                      /// 그룹 안에 아이템들 간의 간격(spacing)이 10이다
+        section.contentInsets = .init(top: 10, leading: 10, bottom: 20, trailing: 10)   /// 각 섹션간의 inset 지정
+        
+        return UICollectionViewLayout()
+        
+    }
+    
+    private func configureUI() {
+        view.backgroundColor = .black
+        [label, collectionView].forEach { view.addSubview($0) }
+        
+        label.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(10)
+            $0.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).inset(10)
+        }
+        
+        collectionView.snp.makeConstraints {
+            $0.top.equalTo(label.snp.bottom).offset(20)
+            $0.horizontalEdges.equalTo(view.safeAreaLayoutGuide.snp.horizontalEdges)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+        }
+    }
+    
 }
 
+// 섹션을 좀 더 쉽게 구별하기 위해 enum 사용
+// CaseIterable을 사용해서 각 case에 0,1,2번째로 Index 순서가 매겨짐
+enum Section: Int, CaseIterable {
+    case popularMovies
+    case topRatedMovies
+    case upcomingMovies
+    
+    var title: String {
+        switch self {
+        case .popularMovies: return "이 시간 핫한 영화"
+        case .topRatedMovies: return "가장 평점이 높은 영화"
+        case .upcomingMovies: return "곧 개봉되는 영화"
+        }
+    }
+}
+
+extension MainViewController: UICollectionViewDelegate {
+    
+}
+
+extension MainViewController: UICollectionViewDataSource {
+    
+    //각 indexPath 별로 어떤 Cell을 return 할건지, tableView의 cellForRowAt과 비슷한 역할, 섹션 별로 나눌 수 있음
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PosterCell.id, for: indexPath) as? PosterCell else {
+            return UICollectionViewCell()
+        }
+        
+        switch Section(rawValue: indexPath.section) {
+        // 각 셀에 포스터를 포함한 Movie 데이터를 서버에서 받아서 넣으면 됨
+        case .popularMovies:
+            cell.configure(with: popularMovies[indexPath.row])
+        case .topRatedMovies:
+            cell.configure(with: topRatedMovies[indexPath.row])
+        case .upcomingMovies:
+            cell.configure(with: upcomingMovies[indexPath.row])
+        default :
+            return UICollectionViewCell()
+        }
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        //kind 종류가 header일 경우만 코드를 읽겠다는 의미
+        guard kind == UICollectionView.elementKindSectionHeader else {
+            return UICollectionReusableView()
+        }
+        
+        guard let headerView = collectionView.dequeueReusableSupplementaryView(
+            ofKind: kind,
+            withReuseIdentifier: SectionHeaderView.id,
+            for: indexPath
+        ) as? SectionHeaderView else { return UICollectionReusableView() } // 섹션 헤더뷰로 타입캐스팅하고 만약 실패시 UICollectionReusableView(Default 값)를 리턴
+        
+        // allCases는 Setion의 모든 case를 List로 뽑아냄
+        // Caselterable 프로토콜을 채택해서 allCases 프로퍼티 사용이 가능함
+        let sectionType = Section.allCases[indexPath.section]
+        
+        // case에 따라 헤더에 StringValur로 return 됨 (titleLabel에 text가 됨)
+        headerView.configure(title: sectionType.title)
+        return headerView
+    }
+    
+    // 각 섹션마다 아이템이 몇개 있는지 지정해주는 메서드
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        switch Section(rawValue: section) {
+        case .popularMovies: return popularMovies.count
+        case .topRatedMovies: return topRatedMovies.count
+        case .upcomingMovies: return upcomingMovies.count
+        default : return 0
+        }
+    }
+}
