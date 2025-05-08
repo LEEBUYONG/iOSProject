@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		78767C062DCC70D300697C82 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 78767C052DCC70D300697C82 /* SnapKit */; };
+		78767C0F2DCC721A00697C82 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 78767C0E2DCC721A00697C82 /* Then */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				78767C062DCC70D300697C82 /* SnapKit in Frameworks */,
+				78767C0F2DCC721A00697C82 /* Then in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +86,7 @@
 			name = NetflixCloneApp_BY;
 			packageProductDependencies = (
 				78767C052DCC70D300697C82 /* SnapKit */,
+				78767C0E2DCC721A00697C82 /* Then */,
 			);
 			productName = NetflixCloneApp_BY;
 			productReference = 78767BC92DCC55FA00697C82 /* NetflixCloneApp_BY.app */;
@@ -115,6 +118,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				78767C042DCC70D300697C82 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				78767C0D2DCC721A00697C82 /* XCRemoteSwiftPackageReference "Then" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 78767BCA2DCC55FA00697C82 /* Products */;
@@ -354,6 +358,14 @@
 				minimumVersion = 5.7.1;
 			};
 		};
+		78767C0D2DCC721A00697C82 /* XCRemoteSwiftPackageReference "Then" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devxoul/Then.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -361,6 +373,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 78767C042DCC70D300697C82 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		78767C0E2DCC721A00697C82 /* Then */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 78767C0D2DCC721A00697C82 /* XCRemoteSwiftPackageReference "Then" */;
+			productName = Then;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
